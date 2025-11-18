@@ -1,24 +1,35 @@
-const directors = [
-  { name: "Scott Derrickson", movies: ["Doctor Strange", "Sinister", "The Exorcism of Emily Rose"] },
-  { name: "Mike Mitchell", movies: ["Trolls", "Alvin and the Chipmunks: Chipwrecked", "Sky High"] },
-  { name: "Edward Zwick", movies: ["Jack Reacher: Never Go Back", "Blood Diamond", "The Siege"] },
-];
+import { useEffect, useState } from "react";
+import NavBar from "../components/NavBar";
 
 function Directors() {
+  const [directors, setDirectors] = useState([]); // empty array initially
+
+  useEffect(() => {
+    fetch("http://localhost:4000/directors")
+      .then((res) => res.json())
+      .then((data) => setDirectors(data))
+      .catch(console.error);
+  }, []);
+
   return (
-    <div>
-      <h1>Directors Page</h1>
-      {directors.map((director) => (
-        <article key={director.name}>
-          <h2>{director.name}</h2>
-          <ul>
-            {director.movies.map((movie, idx) => (
-              <li key={idx}>{movie}</li>
-            ))}
-          </ul>
-        </article>
-      ))}
-    </div>
+    <>
+      <header>
+        <NavBar />
+      </header>
+      <main>
+        <h1>Directors Page</h1>
+        {directors.map((director) => (
+          <article key={director.name}>
+            <h2>{director.name}</h2>
+            <ul>
+              {director.movies.map((movie, idx) => (
+                <li key={idx}>{movie}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </main>
+    </>
   );
 }
 

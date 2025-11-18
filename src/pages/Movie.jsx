@@ -1,25 +1,37 @@
 import { useParams } from "react-router-dom";
-
-const movies = [
-  { id: 1, title: "Doctor Strange", time: 115, genres: ["Action", "Adventure", "Fantasy"] },
-  { id: 2, title: "Trolls", time: 92, genres: ["Animation", "Comedy", "Family"] },
-  { id: 3, title: "Pitch Perfect", time: 112, genres: ["Comedy", "Music", "Romance"] },
-];
+import { useEffect, useState } from "react";
+import NavBar from "../components/NavBar";
 
 function Movie() {
   const { id } = useParams();
-  const movie = movies.find((m) => m.id === parseInt(id));
+  const [movie, setMovie] = useState({ genres: [] }); // initialize genres array
 
-  if (!movie) return <p>Movie not found</p>;
+  useEffect(() => {
+    async function fetchMovie() {
+      try {
+        const res = await fetch(`http://localhost:4000/movies/${id}`);
+        const data = await res.json();
+        setMovie(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchMovie();
+  }, [id]);
 
   return (
-    <div>
-      <h1>{movie.title}</h1>
-      <p>{movie.time}</p>
-      {movie.genres.map((genre, idx) => (
-        <span key={idx}>{genre}</span>
-      ))}
-    </div>
+    <>
+      <header>
+        <NavBar />
+      </header>
+      <main>
+        <h1>{movie.title || "Loading..."}</h1>
+        {movie.time && <p>{movie.time}</p>}
+        {movie.genres.map((genre, idx) => (
+          <span key={idx}>{genre}</span>
+        ))}
+      </main>
+    </>
   );
 }
 
