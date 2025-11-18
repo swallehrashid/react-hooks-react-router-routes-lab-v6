@@ -7,17 +7,19 @@ const actors = [
 
 function Actors() {
   return (
-    <main>
+    <div>
       <h1>Actors Page</h1>
-      {actors.map(actor => (
-        <section key={actor.name}>
+      {actors.map((actor) => (
+        <article key={actor.name}>
           <h2>{actor.name}</h2>
           <ul>
-            {actor.movies.map(movie => <li key={movie}>{movie}</li>)}
+            {actor.movies.map((movie, idx) => (
+              <li key={idx}>{movie}</li>
+            ))}
           </ul>
-        </section>
+        </article>
       ))}
-    </main>
+    </div>
   );
 }
 
