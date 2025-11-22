@@ -3,47 +3,26 @@ import Actors from "./pages/Actors";
 import Directors from "./pages/Directors";
 import Movie from "./pages/Movie";
 import ErrorPage from "./pages/ErrorPage";
-import NavBar from "./components/NavBar";
 
 const routes = [
   {
     path: "/",
-    element: (
-      <>
-        <NavBar />
-        <Home />
-      </>
-    ),
+    element: <Home />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/actors",
-    element: (
-      <>
-        <NavBar />
-        <Actors />
-      </>
-    ),
+    element: <Actors />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/directors",
-    element: (
-      <>
-        <NavBar />
-        <Directors />
-      </>
-    ),
+    element: <Directors />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/movie/:id",
-    element: (
-      <>
-        <NavBar />
-        <Movie />
-      </>
-    ),
+    element: <Movie />,
     errorElement: <ErrorPage />,
   },
 ];

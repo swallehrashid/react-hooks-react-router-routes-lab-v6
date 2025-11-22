@@ -4,7 +4,7 @@ import NavBar from "../components/NavBar";
 
 function Movie() {
   const { id } = useParams();
-  const [movie, setMovie] = useState({ genres: [] }); // initialize genres array
+  const [movie, setMovie] = useState({ genres: [] });
 
   useEffect(() => {
     async function fetchMovie() {
@@ -21,9 +21,7 @@ function Movie() {
 
   return (
     <>
-      <header>
-        <NavBar />
-      </header>
+      <NavBar />
       <main>
         <h1>{movie.title || "Loading..."}</h1>
         {movie.time && <p>{movie.time}</p>}

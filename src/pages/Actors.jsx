@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 
 function Actors() {
-  const [actors, setActors] = useState([]); // empty array initially
+  const [actors, setActors] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:4000/actors")
@@ -13,9 +13,7 @@ function Actors() {
 
   return (
     <>
-      <header>
-        <NavBar />
-      </header>
+      <NavBar />
       <main>
         <h1>Actors Page</h1>
         {actors.map((actor) => (
