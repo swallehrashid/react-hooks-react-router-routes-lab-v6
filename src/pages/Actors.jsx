@@ -8,12 +8,14 @@ function Actors() {
     fetch("http://localhost:4000/actors")
       .then((res) => res.json())
       .then((data) => setActors(data))
-      .catch(console.error);
+      .catch((err) => console.error(err));
   }, []);
 
   return (
     <>
-      <NavBar />
+      <header>
+        <NavBar />
+      </header>
       <main>
         <h1>Actors Page</h1>
         {actors.map((actor) => (

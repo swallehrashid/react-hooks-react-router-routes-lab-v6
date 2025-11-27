@@ -8,12 +8,14 @@ function Directors() {
     fetch("http://localhost:4000/directors")
       .then((res) => res.json())
       .then((data) => setDirectors(data))
-      .catch(console.error);
+      .catch((err) => console.error(err));
   }, []);
 
   return (
     <>
-      <NavBar />
+      <header>
+        <NavBar />
+      </header>
       <main>
         <h1>Directors Page</h1>
         {directors.map((director) => (

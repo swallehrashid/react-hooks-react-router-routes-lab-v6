@@ -14,7 +14,9 @@ function Home() {
 
   return (
     <>
-      <NavBar />
+      <header>
+        <NavBar />
+      </header>
       <main>
         <h1>Home Page</h1>
         {movies.map((movie) => (
