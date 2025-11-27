@@ -8,18 +8,16 @@ function Directors() {
     fetch("http://localhost:4000/directors")
       .then((res) => res.json())
       .then((data) => setDirectors(data))
-      .catch((err) => console.error(err));
+      .catch(console.error);
   }, []);
 
   return (
     <>
-      <header>
-        <NavBar />
-      </header>
+      <NavBar />
       <main>
         <h1>Directors Page</h1>
         {directors.map((director) => (
-          <article key={director.name}>
+          <article key={director.id}>
             <h2>{director.name}</h2>
             <ul>
               {director.movies.map((movie, idx) => (

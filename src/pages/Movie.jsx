@@ -4,25 +4,27 @@ import NavBar from "../components/NavBar";
 
 function Movie() {
   const { id } = useParams();
-  const [movie, setMovie] = useState(null);
+  const [movie, setMovie] = useState({ genres: [] });
 
   useEffect(() => {
-    fetch(`http://localhost:4000/movies/${id}`)
-      .then((res) => res.json())
-      .then((data) => setMovie(data))
-      .catch((err) => console.error(err));
+    async function fetchMovie() {
+      try {
+        const res = await fetch(`http://localhost:4000/movies/${id}`);
+        const data = await res.json();
+        setMovie(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchMovie();
   }, [id]);
-
-  if (!movie) return <p>Loading...</p>;
 
   return (
     <>
-      <header>
-        <NavBar />
-      </header>
+      <NavBar />
       <main>
-        <h1>{movie.title}</h1>
-        <p>{movie.time}</p>
+        <h1>{movie.title || "Loading..."}</h1>
+        {movie.time && <p>{movie.time}</p>}
         {movie.genres.map((genre, idx) => (
           <span key={idx}>{genre}</span>
         ))}
